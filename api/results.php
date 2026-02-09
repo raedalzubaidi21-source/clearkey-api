@@ -1,15 +1,16 @@
 <?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-$keyId = $_GET['keyid'];
-$key = $_GET['key'];
-$jsonData = array(
-'keys' => array(
-array(
-'kty' => 'oct',
-'k' => base64_encode(hex2bin($key)),
-'kid' => base64_encode(hex2bin($keyId))
-)
-)
-);
-echo json_encode($jsonData);
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+
+$kid = "PUT_BASE64_KID";
+$key = "PUT_BASE64_KEY";
+
+echo json_encode([
+ "keys"=>[
+  [
+   "kty"=>"oct",
+   "kid"=>$kid,
+   "k"=>$key
+  ]
+ ]
+]);
