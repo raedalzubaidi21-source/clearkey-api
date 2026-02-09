@@ -1,16 +1,23 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
-$keyid = $_GET['keyid'] ?? '';
+$keyId = $_GET['keyid'] ?? '';
 $key = $_GET['key'] ?? '';
 
+if (empty($keyId) || empty($key)) {
+echo json_encode(['error' => 'Missing parameters']);
+exit;
+}
+
 $response = [
-'keys' => [[
+'keys' => [
+[
 'kty' => 'oct',
-'kid' => base64_encode(hex2bin($keyid)),
+'kid' => base64_encode(hex2bin($keyId)),
 'k' => base64_encode(hex2bin($key))
-]]
+]
+]
 ];
 
 echo json_encode($response);
